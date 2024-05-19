@@ -7,6 +7,12 @@ const tintColorLight = '#0a7ea4';
 const tintColorDark = '#fff';
 
 export const Colors = {
+  green_darner_tail: {
+    background: '#74b9ff'
+  },
+  alizarin: {
+    background: '#e74c3c'
+  },
   light: {
     text: '#11181C',
     background: '#fff',
