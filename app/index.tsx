@@ -1,4 +1,4 @@
-import { Text, View, FlatList, Image, SafeAreaView, StyleSheet, TouchableOpacity, Button } from "react-native";
+import { Text, View, FlatList, Image, SafeAreaView, StyleSheet, TouchableOpacity, Button, RefreshControl } from "react-native";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
@@ -20,6 +20,7 @@ export default function Index() {
 
   const [visible, setVisible] = useState(false);
   const [pickContact, setPickContact] = useState<Contact | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
 
   const navigation = useNavigation<ContactScreenNavigationProp>();
 
@@ -38,6 +39,12 @@ export default function Index() {
       setVisible(false)
     }
   }, [contactAlert])
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    dispatch(fetchingContacts());
+    setRefreshing(false);
+  };
 
   const onLongPress = (contact: Contact) => () => {
     setVisible(true)
@@ -98,6 +105,12 @@ export default function Index() {
             </View>
           </TouchableOpacity>
         )}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
       />
       {contactAlert.showAlert ? 
         <CustomAlert
@@ -168,4 +181,3 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 })
-

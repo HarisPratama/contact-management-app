@@ -47,7 +47,12 @@ const ContactFormScreen: React.FC<Props> = () => {
 
     const handleSubmit = (formData: CreateContact) => {
         if (payload?.id) {
-            dispatch(updatingContact(formData))
+            const updatedData:Contact = {
+                ...formData,
+                id: payload.id,
+                age: +formData.age
+            }
+            dispatch(updatingContact(updatedData))
         } else {
             dispatch(addContact(formData))
         }

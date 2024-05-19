@@ -134,7 +134,7 @@ export const addContact = (payload: CreateContact): AppThunk => async (dispatch)
     }, 3000);
 };
 
-export const updatingContact = (payload: CreateContact): AppThunk => async (dispatch) => {
+export const updatingContact = (payload: Contact): AppThunk => async (dispatch) => {
     dispatch(setContactLoad(true));
     try {
         const getData:any = await contactService.updateContact(payload);
